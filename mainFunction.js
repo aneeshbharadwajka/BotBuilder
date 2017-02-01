@@ -71,9 +71,14 @@ function checkMovesValidity(inputMoves) {
 
 function mainFunction() {
   var count = 0;
-  var inputSize, dimensionX, dimensionY, initialPosition, initialPositionDirection; var initialPositionY, initialPositionX, inputMoves;
-  var InputFile = fs.readFileSync(process.argv[2]).toString().split('\n');
-
+  var fileName = process.argv[2];
+  var inputSize, dimensionX, dimensionY, initialPosition, initialPositionDirection; 
+  var initialPositionY, initialPositionX, inputMoves;
+  if(fileName.split('.') !== 'txt') {
+    console.log('Please provide a input text file');
+    process.exit(1);
+  }
+  var InputFile = fs.readFileSync(fileName).toString().split('\n');
   for (var index = 0; index < InputFile.length; index++) {
     if (InputFile[index].length !== 0) {
       if (count === 0) {
