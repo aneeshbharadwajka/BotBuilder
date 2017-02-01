@@ -1,65 +1,7 @@
 var fs = require('fs');
 var path = require('path');
-
-function MoveTheBot(inputMoves, currentDirection, currentLocationX, currentLocationY, dimensionX, dimensionY) {
-  var currentMove;
-  for (var index = 0; index < inputMoves.length; index++) {
-    currentMove = inputMoves[index];
-    if (currentDirection === 'N') {
-      if (currentMove === 'M' && currentLocationY === 0) {
-        console.log('Cannot Move as end of grid is reached');
-      } else if (currentMove === 'M') {
-        currentLocationY = currentLocationY - 1;
-      } else if (currentMove === 'L') {
-        currentDirection = 'W';
-      } else if (currentMove === 'R') {
-        currentDirection = 'E';
-      }
-    }
-    else if (currentDirection === 'S') {
-      if (currentMove === 'M' && currentLocationY === dimensionY - 1) {
-        console.log('Cannot Move as end of grid is reached');
-      } else if (currentMove === 'M') {
-        currentLocationY = currentLocationY + 1;
-      } else if (currentMove === 'L') {
-        currentDirection = 'E';
-      } else if (currentMove === 'R') {
-        currentDirection = 'W';
-      }
-    }
-    else if (currentDirection === 'E') {
-      if (currentMove === 'M' && currentLocationX === dimensionX - 1) {
-        console.log('Cannot Move as end of grid is reached');
-      } else if (currentMove === 'M') {
-        currentLocationX = currentLocationX + 1;
-      } else if (currentMove === 'L') {
-        currentDirection = 'N';
-      } else if (currentMove === 'R') {
-        currentDirection = 'S';
-      }
-    }
-    else if (currentDirection === 'W') {
-      if (currentMove === 'M' && currentLocationX === 0) {
-        console.log('Cannot Move as end of grid is reached');
-      } else if (currentMove === 'M') {
-        currentLocationX = currentLocationX - 1;
-      } else if (currentMove === 'L') {
-        currentDirection = 'S';
-      } else if (currentMove === 'R') {
-        currentDirection = 'N';
-      }
-    }
-    //if(index === 2)console.log(currentDirection);
-    //console.log(currentDirection);
-  }
-  console.log(currentLocationX, currentLocationY, currentDirection);
-}
-
-function checkInputCoordinates(initialPositionX, initialPositionY, dimensionX, dimensionY) {
-  if (initialPositionX < 0 || initialPositionX >= dimensionX || initialPositionY < 0 || initialPositionY >= dimensionY) {
-    return false;
-  }
-}
+var MoveTheBot = require('./MoveBotFunction.js');
+var checkInputCoordinates = require('./checkInputFunction.js');
 function checkMovesValidity(inputMoves) {
   for (var index = 0; index < inputMoves.length; index++) {
     if (inputMoves[index] !== 'L' && inputMoves[index] !== 'R' && inputMoves[index] !== 'M') {
@@ -72,12 +14,12 @@ function checkMovesValidity(inputMoves) {
 function mainFunction() {
   var count = 0;
   var fileName = process.argv[2];
-  var inputSize, dimensionX, dimensionY, initialPosition, initialPositionDirection; 
+  var inputSize, dimensionX, dimensionY, initialPosition, initialPositionDirection;
   var initialPositionY, initialPositionX, inputMoves;
-  if(fileName.split('.') !== 'txt') {
-    console.log('Please provide a input text file');
-    process.exit(1);
-  }
+  // if(fileName.split('.') !== '.txt') {
+  //   console.log('Please provide a input text file');
+  //   process.exit(1);
+  // }
   var InputFile = fs.readFileSync(fileName).toString().split('\n');
   for (var index = 0; index < InputFile.length; index++) {
     if (InputFile[index].length !== 0) {
