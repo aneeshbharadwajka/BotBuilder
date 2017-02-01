@@ -3,8 +3,10 @@ var path = require('path');
 
 function MoveTheBot(inputMoves, currentDirection, currentLocationX, currentLocationY, dimensionX, dimensionY) {
   var currentMove;
+  
   for (var index = 0; index < inputMoves.length; index++) {
     currentMove = inputMoves[index];
+    
     if (currentDirection === 'N') {
       if (currentMove === 'M' && currentLocationY === 0) {
         console.log('Cannot Move as end of grid is reached');
@@ -16,7 +18,7 @@ function MoveTheBot(inputMoves, currentDirection, currentLocationX, currentLocat
         currentDirection = 'E';
       }
     }
-    if (currentDirection === 'S') {
+    else if (currentDirection === 'S') {
       if (currentMove === 'M' && currentLocationY === dimensionY) {
         console.log('Cannot Move as end of grid is reached');
       } else if (currentMove === 'M') {
@@ -27,7 +29,7 @@ function MoveTheBot(inputMoves, currentDirection, currentLocationX, currentLocat
         currentDirection = 'W';
       }
     }
-    if (currentDirection === 'E') {
+    else if (currentDirection === 'E') {
       if (currentMove === 'M' && currentLocationX === dimensionX) {
         console.log('Cannot Move as end of grid is reached');
       } else if (currentMove === 'M') {
@@ -38,7 +40,7 @@ function MoveTheBot(inputMoves, currentDirection, currentLocationX, currentLocat
         currentDirection = 'S';
       }
     }
-    if (currentDirection === 'W') {
+    else if (currentDirection === 'W') {
       if (currentMove === 'M' && currentLocationX === 0) {
         console.log('Cannot Move as end of grid is reached');
       } else if (currentMove === 'M') {
@@ -49,6 +51,8 @@ function MoveTheBot(inputMoves, currentDirection, currentLocationX, currentLocat
         currentDirection = 'N';
       }
     }
+    //if(index === 2)console.log(currentDirection);
+    //console.log(currentDirection);
   }
   console.log(currentLocationX, currentLocationY, currentDirection);
 }
